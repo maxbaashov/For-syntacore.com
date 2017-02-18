@@ -1,0 +1,16 @@
+input = readLines("input.txt") #Запускайте из папки с Вашим input-ом
+
+WeightBinaryString = function(string) {
+  return(sum(as.numeric(
+    unlist(strsplit(string, split = "")))))
+}
+
+WeightBinaryMatrix = function(somematrix) {
+  return(as.data.frame(table(unlist(
+    lapply(somematrix, WeightBinaryString))), stringsAsFactors = FALSE))
+}
+
+weightdistribution = WeightBinaryMatrix(input)
+
+write.table(weightdistribution, "output.txt",
+            quote = FALSE, row.names = FALSE, col.names = FALSE, sep="\t")
